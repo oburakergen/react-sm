@@ -12,7 +12,6 @@ export interface ICharacter {
   name: string;
   episodes: number;
   image: string;
-  choosen: boolean;
 }
 
 type CharacterState = {
@@ -38,14 +37,6 @@ export const characterModel = createModel<RootModel>()({
         data: payload
       };
     },
-    keyboardProcess: (state: CharacterState, payload: ICharacter): CharacterState => {
-      return {
-        ...state,
-        data: state.data.map((item, key) => {
-          return item.id === payload.id ? { ...payload, choosen: !payload.choosen } : item;
-        })
-      };
-    }
   },
   effects: (dispatch: RematchDispatch<RootModel>) => ({
     async fetchCurrent(name: string) {
@@ -56,7 +47,7 @@ export const characterModel = createModel<RootModel>()({
       const data = await fetch(`https://rickandmortyapi.com/api/character/?name=${name}`).then((res: any) => {
         return res.json();
       }).catch(() => {
-        console.log("catch");
+        characterModel.updateStatus(Status.error);
       });
 
       characterModel.updateStatus(Status.idle);
@@ -69,8 +60,7 @@ export const characterModel = createModel<RootModel>()({
             id: character.id,
             name: character.name,
             episodes: character.episode.length,
-            image: character.image,
-            choosen: false
+            image: character.image
           };
         });
 

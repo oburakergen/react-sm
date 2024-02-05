@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const useKeyboardNavigation = (totalItems: number) => {
-  debugger;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
