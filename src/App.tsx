@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, KeyboardEventHandler, useCallback, useRef, useState } from 'react';
+import React, { ChangeEventHandler, KeyboardEventHandler, useCallback, useRef } from 'react';
 import './App.css';
 import { Command, CommandInput } from '@/components/ui/command';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Empty } from '@/components/Empty';
-import { CharacterList } from '@/CharacterList';
+import { CharacterList } from '@/components/CharacterList';
 import { useAppContext } from '@/context/appContext';
 
 function App() {
